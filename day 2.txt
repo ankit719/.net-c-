@@ -1,0 +1,263 @@
+namespace DAC
+{
+    internal class student
+    {
+        static void Main(string[] args)
+        {
+            string str = "99.8";
+            Console.WriteLine(float.Parse(str)+10);
+            Console.ReadLine();
+        }
+        
+    }
+}
+-------------------------------------------------------
+namespace DAC
+{
+    internal class student
+    {
+        static void Main(string[] args)
+        {
+            string str = "99";
+            Console.WriteLine(int.Parse(str)+10);
+            Console.ReadLine();
+        }
+        
+    }
+}
+
+--------------------------------------------------------
+namespace DAC
+{
+    internal class student
+    {
+        static void Main(string[] args)
+        {
+            string str = "99.8";
+            Console.WriteLine(double.Parse(str)+10);
+            Console.ReadLine();
+        }
+        
+    }
+}
+--------------------------------------------------------
+namespace DAC
+{
+    internal class student
+    {
+        static void Main(string[] args)
+        {
+            int str = 99;
+            Console.WriteLine(str.ToString()+"hii");
+            Console.ReadLine();
+        }
+        
+    }
+}
+
+----------------------------------------------------------
+namespace DAC
+{
+    internal class student
+    {
+      
+        static void Main(string[] args)
+        {
+            string a=Console.ReadLine();
+            string b = Console.ReadLine();
+            Console.WriteLine("sum of two number is= "+(int.Parse(a)+int.Parse(b)));
+            Console.ReadLine();
+        }
+        
+    }
+}
+--------------------------------------------------------------
+/*Create a class calculator and write 3 instance method square, cube, round[if in put 22.5 o/p 22]
+Which will return square .cube and rounded number.
+Create object and call method and print the result.
+
+*/
+namespace DAC
+{
+    class calculator
+    {
+        public int square(float x)
+        {
+            return (int)(x * x);
+        }
+        public int cube(float x)
+        {
+            return (int)(x * x * x);
+        }
+        public int round(float n)
+        {
+            return (int)n;
+        }
+
+    }
+    internal class student
+    {
+      
+        static void Main(string[] args)
+        {
+            string a=Console.ReadLine();
+            float num=float.Parse(a);
+            calculator obj=new calculator();
+            Console.WriteLine(obj.square(num));
+            Console.WriteLine(obj.cube(num));
+            Console.WriteLine(obj.round(num));
+            Console.ReadLine();
+        }
+        
+    }
+}
+---------------------------------------------------------
+namespace DAC
+{
+    class calculator
+    {
+        public int square(float x)
+        {
+            return (int)(x * x);
+        }
+        public int cube(float x)
+        {
+            return (int)(x * x * x);
+        }
+        public int round(float n)
+        {
+            return (int)n;
+        }
+
+    }
+    internal class student
+    {
+      
+        static void Main(string[] args)
+        {
+            Console.WriteLine("enter a number for square");
+            string x=Console.ReadLine();
+            Console.WriteLine("enter a number for cube");
+            string y = Console.ReadLine();
+            Console.WriteLine("enter a number for round off");
+            string z= Console.ReadLine();
+            float p,q,r;
+            bool a1 = float.TryParse(x, out p);
+            bool a2 = float.TryParse(y, out q);
+            bool a3 = float.TryParse(z, out r);
+            calculator obj=new calculator();
+            if (a1 == true)
+            {
+                Console.WriteLine(obj.square(p));
+
+            }
+
+            if (a2 == true)
+            {
+                Console.WriteLine(obj.cube(q));
+
+            }
+            if (a3 == true)
+            {
+                Console.WriteLine(obj.round(r));
+
+            }
+            Console.ReadLine();
+        }
+        
+    }
+}
+------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace DAC
+{
+    class myclass
+    {
+        public int a;
+        public int b;
+        public myclass() { 
+        }
+        public myclass(int x)
+        {
+            this.a = x;
+        }
+        public myclass(int x,int y)
+        {
+            this.a = x;
+            this.b = y;
+        }
+        public void display()
+        {
+            Console.WriteLine("a= " + a + " b= " + b);
+        }
+    }
+    internal class student
+    {
+
+        static void Main(string[] args)
+        {
+            myclass obj1 = new myclass();
+            obj1.display();
+            myclass obj2 = new myclass(10);
+            obj2.display();
+            myclass obj3 = new myclass(30,40);
+            obj3.display();
+            Console.ReadLine();
+
+        }
+    }
+}
+
+----------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace DAC
+{
+    class myclass
+    {
+        public int a;
+        public int b;
+        public myclass() { 
+        }
+        public myclass(int x)
+        {
+            this.a = x;
+        }
+        public myclass(int x,int y)
+        {
+            this.a = x;
+            this.b = y;
+        }
+        public void display()
+        {
+            Console.WriteLine("a= " + a + " b= " + b);
+        }
+    }
+    internal class student
+    {
+
+        static void Main(string[] args)
+        {
+            
+            myclass obj1 = new myclass(30,40);
+            obj1.display();
+            myclass obj2;
+            obj2 = obj1;
+            obj2.display();
+            obj1.a = 33;
+            obj1.display();
+            obj2.display() ;
+            Console.ReadLine();
+
+        }
+    }
+}
+
+-------------------------------------------------------------------------
