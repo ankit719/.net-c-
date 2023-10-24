@@ -1,0 +1,220 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Demo01
+{
+    public class student
+    {
+        string name;
+        int math, science, eng;
+        public student(string name, int math, int science, int eng)
+        {
+            this.name = name;
+            this.math = math;
+            this.science = science;
+            this.eng = eng;
+        }
+        public int total_marks()
+        {
+            int sum=math+science+eng;
+            if (sum > 300)
+            {
+                Console.WriteLine("number are not valid");
+                return 0;
+            }
+            return sum;
+        }
+        public void display()
+        {
+            Console.WriteLine("name= " + name + "total mask= " + total_marks());
+        }
+            
+    }
+}
+namespace demo 
+    {
+
+        internal class demo
+        { static void Main(string[] args)
+                {
+            student obj1 = new student("ankit", 50, 80, 80);
+            obj1.display();
+            student obj2 = new student("atul", 50, 10, 80);
+            student obj3 = new student("shweta", 50, 80,1080);
+            obj2.display();
+            obj3.display();
+            Console.ReadLine();
+
+                }
+        }
+
+}
+--------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace demo 
+{
+    internal class account
+    {
+        string name;
+        double balanace;
+        static int id_acc;
+        int id;
+        public account(string name, double balanace)
+        {
+            id=++id_acc;
+            this.name = name;
+            this.balanace = balanace;
+        }
+        public void deposit(int amount)
+        {
+            balanace += amount;
+        }
+        public void withdraw(int amount)
+        {
+            if(balanace < amount) {
+                Console.WriteLine("unsufficient amount");
+                    }
+            else
+            {
+                balanace -= amount;
+            }
+        }
+        public void display()
+        {
+            Console.WriteLine("[ id ="+id+" name="+name+" balanace="+balanace+"]");
+        }
+    }
+    internal class demo
+    {
+        public static void Main(string[] args)
+        {
+            account obj1 = new account("ankit", 200);
+            obj1.display();
+            obj1.deposit(100);
+            obj1.withdraw(50);
+            obj1.display();
+            account obj2 = new account("atul", 300);
+            obj2.display();
+            obj2.deposit(100);
+            obj2.withdraw(50);
+            obj2.display();
+            Console.ReadLine();
+        }
+    } 
+}
+----------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace demo 
+{
+    internal class account
+    {
+        string name;
+        double balanace;
+        static int id_acc;
+        int id;
+        static account()
+        {
+            Console.WriteLine("bank of baroda");
+        }
+        public account(string name, double balanace)
+        {
+            id=++id_acc;
+            this.name = name;
+            this.balanace = balanace;
+        }
+        public void deposit(int amount)
+        {
+            balanace += amount;
+        }
+        public void withdraw(int amount)
+        {
+            if(balanace < amount) {
+                Console.WriteLine("unsufficient amount");
+                    }
+            else
+            {
+                balanace -= amount;
+            }
+        }
+        public void display()
+        {
+            Console.WriteLine("[ id ="+id+" name="+name+" balanace="+balanace+"]");
+        }
+    }
+    internal class demo
+    {
+        public static void Main(string[] args)
+        {
+            account obj1 = new account("ankit", 200);
+            obj1.display();
+            obj1.deposit(100);
+            obj1.withdraw(50);
+            obj1.display();
+            account obj2 = new account("atul", 300);
+            obj2.display();
+            obj2.deposit(100);
+            obj2.withdraw(50);
+            obj2.display();
+            Console.ReadLine();
+        }
+    } 
+}
+-------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace demo 
+{
+    internal class Employee
+    {
+        int id;
+        string name;
+        double salary;
+        double netsalary;
+        static int n;
+        public Employee(string name,double salary) { 
+            id =++n;
+            this.name = name;
+            this.salary = salary;
+        }
+        public double calculate()
+        {
+            netsalary = salary - (salary * 0.1);
+            return netsalary;
+        }
+            
+        public void display()
+        {
+            Console.WriteLine("[ id ="+id+" name="+name+" net_salary="+calculate()+"]");
+        }
+    }
+    internal class demo
+    {
+        public static void Main(string[] args)
+        {
+            Employee e1 = new Employee("ankit", 50000);
+            Employee e2 = new Employee("atul", 60000);
+            Employee e3 = new Employee("shweta", 70000);
+            e1.display();
+            e2.display();
+            e3.display();
+            Console.ReadLine();
+               
+        }
+    } 
+}
+--------------------------------------------------------------------------
+
