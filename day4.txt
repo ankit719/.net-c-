@@ -1,0 +1,266 @@
+using System;
+namespace demo 
+{
+    internal class Employee
+    {
+        public const int num = 200;
+    }
+    internal class demo
+    {
+        public static void Main(string[] args)
+        {
+           
+            Console.WriteLine(Employee.num);
+
+        }
+    } 
+}
+---------------------------------------------------------
+using System;
+namespace demo 
+{
+    internal class Employee
+    {
+        private const int num = 200;
+        public void show()
+        {
+            Console.WriteLine(num);
+        }
+    }
+    internal class demo
+    {
+        public static void Main(string[] args)
+        {
+           
+            Employee emp = new Employee();
+            emp.show();
+
+        }
+    } 
+}
+-------------------------------------------------------
+using System;
+namespace basic1
+{
+    static class maths
+    {
+        /* public void fun()
+         {
+             Console.WriteLine("heyyy");
+         }*/
+        const int num1 = 50;
+        static int num2 = 100;
+       public static int srq(int n)
+        {
+            return n * n;
+        }
+        public static int cube(int n)
+        {
+            return n * n*n;
+        }
+        public static void getdata()
+        {
+            Console.WriteLine(num1);
+            Console.WriteLine(num2);
+        }
+    }
+    class EmployeeDemo
+    {
+        static void Main()
+        {
+            //maths obj = new maths(); //error
+            Console.WriteLine(maths.srq(2));
+            Console.WriteLine(maths.cube(2));
+            maths.getdata();
+
+        }
+    }
+}
+------------------------------------------------------
+using System;
+namespace basic1
+{
+    static class maths
+    {
+        /* public void fun()
+         {
+             Console.WriteLine("heyyy");
+         }*/
+        public const int num1 = 50;
+        public static int num2 = 100;
+        static maths()
+        {
+            Console.WriteLine("inside static const");
+        }
+        public static int cube(int n)
+        {
+            return n * n*n;
+        }
+       
+    }
+    class EmployeeDemo
+    {
+        static void Main()
+        {
+           
+            int y = maths.num1;
+            Console.WriteLine(y);
+            Console.WriteLine(maths.cube(2));
+
+        }
+    }
+}
+---------------------------------------------------------
+using System;
+namespace basic1
+{
+     class student
+    {
+        String name;
+        int age;
+        public  student(string name,int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+        public string Name
+        {
+            set { this.name = value; }
+            get { return this.name; }
+        }
+        public int Age
+        {
+            set { this.age = value; }
+            get { return this.age; }
+        }
+
+
+       
+    }
+    class Demo
+    {
+        static void Main()
+        {
+
+            student s1 = new student("ankit",23);
+            Console.WriteLine(s1.Name);
+            Console.WriteLine(s1.Age);
+            s1.Name = "Atul";
+            s1.Age = 25;
+            Console.WriteLine(s1.Name);
+            Console.WriteLine(s1.Age);
+
+        }
+    }
+}
+------------------------------------------------------------
+using System;
+namespace basic1
+{
+     class student
+    {
+        String name;
+        int age;
+        public  student(string name,int age)
+        {
+            this.name = name;
+            Age = age;
+        }
+        public string Name
+        {
+            set { this.name = value; }
+            get { return this.name; }
+        }
+        public int Age
+        {
+            set { 
+                if(value > 18)
+                {
+                    this.age = value;
+                }
+                else { Console.WriteLine("enter valid age");
+                }
+              
+            }
+            get { return this.age; }
+        }
+
+
+       
+    }
+    class Demo
+    {
+        static void Main()
+        {
+
+            student s1 = new student("ankit",3);
+            Console.WriteLine(s1.Name);
+            Console.WriteLine(s1.Age);
+
+        }
+    }
+}
+-------------------------------------------------------------------
+using System;
+namespace basic1
+{
+     class student
+    {
+
+        private string name;
+        private int age;
+        public student(string name,int age) {
+            Name = name;
+            Age = age;
+        }
+        public string Name
+        {
+            set;
+            get;
+        }
+        public int Age
+        {
+            set;
+            get;
+        }
+
+
+       
+    }
+    class Demo
+    {
+        static void Main()
+        {
+
+            student s = new student("ankit yadav",23);
+            Console.WriteLine(s.Name);
+            Console.WriteLine(s.Age);
+
+        }
+    }
+}
+-----------------------------------------------------------------
+using System;
+namespace basic1
+{
+     class student
+    {
+
+        public  string name {  get; set; }
+        public int age {  get; set; }
+      
+    }
+    class Demo
+    {
+        static void Main()
+        {
+
+            student s = new student(){name = "ankit yadav", age = 23};
+            Console.WriteLine(s.name);
+            Console.WriteLine(s.age);
+
+        }
+    }
+}
+-------------------------------------------------------------------------
+
