@@ -1,0 +1,133 @@
+using System;
+namespace basic1
+{
+    class Demo
+    {
+        static void Main()
+        {
+
+            string a = "ankit";
+            string b = new string(new char[] {'a','n','k','i','t'});
+            Console.WriteLine(a == b);
+            Console.WriteLine(b.Equals(a));
+            Console.WriteLine(a.GetHashCode());
+            Console.WriteLine(b.GetHashCode());
+            Console.WriteLine(object.Equals(a,b));
+            Console.WriteLine(object.ReferenceEquals(a,b));
+            Console.WriteLine(string.Equals(a, b));
+            Console.WriteLine(string.ReferenceEquals(a, b));
+/*True
+True
+6548356
+6548356
+True
+False
+True
+False*/
+
+        }
+    }
+}
+-----------------------------------------------------
+using System;
+namespace basic1
+{
+    class student
+    {
+        string name;
+        public student(string name)
+        {
+            this.name = name;
+        }
+    }
+    class Demo
+    {
+        static void Main()
+        {
+            string a = "ankit";
+            string b = "ankit";
+            Console.WriteLine(a == b);
+            Console.WriteLine(b.Equals(a));
+            Console.WriteLine(a.GetHashCode());
+            Console.WriteLine(b.GetHashCode());
+            Console.WriteLine(object.Equals(a, b));
+            Console.WriteLine(object.ReferenceEquals(a, b));
+            Console.WriteLine(string.Equals(a, b));
+            Console.WriteLine(string.ReferenceEquals(a, b));
+            /*True
+True
+6548356
+6548356
+True
+False
+True
+False*/
+        }
+    }
+}
+
+-----------------------------------------------------
+using System;
+namespace basic1
+{
+    class student
+    {
+        string name;
+        public student(string name)
+        {
+            this.name = name;
+        }
+    }
+    class Demo
+    {
+        static void Main()
+        {
+          student a=new student("ankit");
+          student b = a;
+          Console.WriteLine(a==b);
+            Console.WriteLine(b.Equals(a));
+            Console.WriteLine(a.GetHashCode());
+            Console.WriteLine(b.GetHashCode());
+            Console.WriteLine(object.Equals(a, b));
+            Console.WriteLine(object.ReferenceEquals(a, b));
+            Console.WriteLine(string.Equals(a, b));
+            Console.WriteLine(string.ReferenceEquals(a, b));
+        }
+    }
+}
+/*True
+True
+6548356
+6548356
+True
+False
+True
+False*/
+--------------------------------------------------------------------
+using System; using System.Text;
+namespace ObjectOverrides
+{    // Remember! Person extends Object.
+    class Person :Object
+    {
+        string fnm, lnm;
+        int age;
+   public Person(string fName, string lName, int personAge)
+        {
+            fnm = fName;
+            lnm = lName;
+            age = personAge;
+        } 
+    }
+    class program
+    {
+        static void Main()
+        {    Person a = new Person("Raj", "Mathur", 22);
+            Person b = new Person("Geeta", "Shah", 22);
+            Console.WriteLine(a);
+	 Console.WriteLine(a.ToString());
+          Console.WriteLine(a is Person);//true
+          Console.WriteLine(a is StringBuilder);//false
+         Console.WriteLine(a is Object);//true
+        }
+    }
+}   
