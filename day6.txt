@@ -1,0 +1,302 @@
+/*call by value*/
+namespace Demo1;
+
+     class Demo
+{
+     public void  fun(int x, int y)
+    {
+        x += 10;
+        y+=10;
+        Console.WriteLine("x= " + x + "y= " + y);
+    }
+}
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Demo obj = new Demo();
+            int a = 10;
+            int b = 20;
+            Console.WriteLine("a= " + a + "b= " + b);
+            obj.fun(a, b);
+            Console.WriteLine("a= " + a + "b= " + b);
+    }
+    }
+-------------------------------------------------------------------
+/*call by value*/
+namespace Demo1;
+
+     class Demo
+     {
+         public int num;
+    public Demo(int n)
+    {
+        num = n;
+    }
+    public static void fun(Demo obj)
+    {
+        obj.num += 10;
+    }
+    }
+    internal class Program
+    {
+    
+   
+    static void Main(string[] args)
+        {
+           Demo obj = new Demo(20);
+            Console.WriteLine("num= " + obj.num);
+           Demo.fun(obj);
+            Console.WriteLine("num= " + obj.num);
+
+    }
+    }
+-------------------------------------------------------------------
+/*call by reference using ref*/
+namespace Demo1;
+
+    internal class Program
+    {
+    
+    public static void sqr(ref int i)
+    {
+        i *= i;
+        Console.WriteLine(i);
+    }
+    static void Main(string[] args)
+        {
+        int n = 2;
+        Console.WriteLine(n);
+        Program.sqr(ref n);
+        Console.WriteLine(n);
+
+        }
+    }
+-------------------------------------------------------------
+/*call by reference using out*/
+namespace Demo1;
+
+    internal class Program
+    {
+    
+    public static int sum( int n,out int digit)
+    {
+        int sum1 = 0;
+        int p = 0;
+        while (n > 0)
+        {
+            ++p;
+            sum1 += n % 10;
+            n /= 10;
+
+        }
+        digit = p;
+        return sum1;
+    }
+    static void Main(string[] args)
+        {
+        int n = 12345;
+        int digit;
+        int Sumofdigit = sum(n, out digit);
+        Console.WriteLine("sum of digit= "+Sumofdigit+" digit= "+digit);
+
+        }
+    }
+---------------------------------------------------------------
+namespace Demo1;
+
+    internal class Program
+    {
+    
+    public static int sum( int n,out int digit)
+    {
+        int sum1 = 0;
+        int p = 0;
+        while (n > 0)
+        {
+            ++p;
+            sum1 += n % 10;
+            n /= 10;
+
+        }
+        digit = p;
+        ++digit;
+        return sum1;
+    }
+    static void Main(string[] args)
+        {
+        int n = 12345;
+        int digit=1;
+        ++digit;
+        Console.WriteLine(digit);
+        int Sumofdigit = sum(n, out digit);
+        ++digit;
+        Console.WriteLine("sum of digit= "+Sumofdigit+" digit= "+digit);
+        ++digit;
+        Console.WriteLine("sum of digit= " + Sumofdigit + " digit= " + digit);
+
+    }
+    }
+-------------------------------------------------------------------------------
+/*taking multiple argumrnt in function*/
+namespace Demo1;
+
+    internal class Program
+    {
+    
+    public static int sum( params int[]num)
+    {
+        int sum1 = 0;
+        for(int i = 0; i < num.Length; i++)
+        {
+            sum1 += num[i];
+        }
+        return sum1;
+    }
+    static void Main(string[] args)
+        {
+        int Sum=Program.sum(10, 2, 30, 40, 50);
+        Console.WriteLine("sum= "+Sum);
+
+        }
+    }
+----------------------------------------------------------------------------------
+/*take a number input from user and find there factor and also claculate the number of factor
+and return refernce of array and count number of factor using out*/
+namespace Demo1;
+
+    internal class Program
+    {
+    
+    public static int[] sum( int num,out int count)
+    {
+        int[] ans=new int[num];
+        int j = 0;
+        for(int i = 1; i <= num; i++)
+        {
+            if (num % i == 0)
+            {
+                ans[j] = i;
+
+                ++j;
+            }
+        }
+        count = j ;
+
+        return ans;
+    }
+    static void Main(string[] args)
+        {
+          string n=Console.ReadLine();
+          bool f=int.TryParse(n,out int num);
+        if (f != null)
+        {
+            int c;
+            int[] arr = new int[num];
+            arr = Program.sum(num, out c);
+            Console.WriteLine("count= " + c);
+            for (int i = 0; i < c; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
+        }
+       
+     
+        }
+    }
+------------------------------------------------------------------------
+/*example of deafault agrument*/
+namespace Demo1;
+
+    class Demo
+{
+    string name;
+    int age;
+    int id;
+    public Demo(String  name, int age=0,int id = 0)
+    {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+    public void display()
+    {
+        Console.WriteLine("[name= "+name+" age="+age+" id="+id+"]");
+    }
+}
+    internal class Program
+    {
+    static void Main(string[] args)
+        {
+         Demo obj1 = new Demo("ankit", 23, 101);
+        Demo obj2 = new Demo("atul", 25, 102);
+        Demo obj3 = new Demo("PK");
+        obj1.display();
+        obj2.display();
+        obj3.display();
+
+
+    }
+    }
+------------------------------------------------------------------------------
+/*Example of name as a argument*/
+namespace Demo1;
+
+    class Demo
+{
+    string name;
+    int age;
+    int id;
+    public Demo(String  name, int age=0,int id = 0)
+    {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+    public void display()
+    {
+        Console.WriteLine("[name= "+name+" age="+age+" id="+id+"]");
+    }
+}
+    internal class Program
+    {
+    static void Main(string[] args)
+        {
+         Demo obj1 = new Demo(name:"ankit",age: 23, id:101);
+        Demo obj2 = new Demo(name:"atul", 25, id:102);
+        Demo obj3 = new Demo("PK");
+        obj1.display();
+        obj2.display();
+        obj3.display();
+
+
+    }
+    }
+------------------------------------------------------------------------------
+namespace Demo1;
+
+    class Demo
+{
+    /* public void fun(ref int x) //in case of parameter base on ref and out is not possiable
+     {
+         Console.WriteLine("inside ref x");
+     }*/
+    public void fun(out int x)
+    {
+        x = 1;
+        Console.WriteLine("inside ref x");
+    }
+}
+    internal class Program
+    {
+    static void Main(string[] args)
+        {
+            int tmp;
+            Demo obj=new Demo();
+            obj.fun(out tmp);
+            Console.WriteLine("tmp= "+tmp);
+ 
+         }
+    }
+-------------------------------------------------------------------------
+
