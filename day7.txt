@@ -1,0 +1,526 @@
+namespace Demo1;
+class A
+{
+    public int j;
+    public A(int i)
+    {
+        this.j = i; 
+    }
+}
+class B : A
+{
+    public int i;
+    public B(int i, int j) : base(j)
+    {
+        this.i = i;
+    }
+    public void display()
+    {
+        Console.WriteLine("i= " + i + " j=" + j);
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        B obj = new B(10, 20);
+        obj.display();
+
+    }
+}
+-------------------------------------------------------
+namespace Demo1;
+class A
+{
+    protected int j;
+    static A()
+    {
+        Console.WriteLine("inside A");
+    }
+    public A(int i)
+    {
+        Console.WriteLine("inside A const");
+        this.j = i; 
+    }
+    public void display()
+    {
+        Console.WriteLine(" j=" + j);
+    }
+}
+class B : A
+{
+    public int i;
+    static B()
+    {
+        Console.WriteLine("inside B");
+    }
+    public B(int i, int j) : base(j)
+    {
+        Console.WriteLine("inside B const");
+        this.i = i;
+    }
+    public void display()
+    {
+        Console.WriteLine("i= " + i + " j=" + j);
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        B obj = new B(10, 20);
+        
+
+    }
+}
+------------------------------------------------------------
+namespace Demo1;
+class A
+{
+    protected int j;
+    public A()
+    {
+       
+    }
+    public A(int i)
+    {
+        Console.WriteLine("inside A const");
+        this.j = i; 
+    }
+    public void display()
+    {
+        Console.WriteLine(" j=" + j);
+    }
+}
+class B : A
+{
+    public int i;
+   
+    public B(int i, int j) : base(j)
+    {
+        Console.WriteLine("inside B const");
+        this.i = i;
+    }
+    public void display()
+    {
+        Console.WriteLine("i= " + i + " j=" + j);
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        B obj = new B(10, 20);
+        A obj1 = new A(30);
+        A tmp = new A();
+        tmp = obj1;
+        tmp.display();
+        tmp = obj;
+        obj1.display();
+
+
+    }
+}
+--------------------------------------------------------------------
+namespace Demo1;
+class A
+{
+    protected int j;
+    public A()
+    {
+       
+    }
+    public A(int i)
+    {
+        Console.WriteLine("inside A const");
+        this.j = i; 
+    }
+    public void display()
+    {
+        Console.WriteLine(" j=" + j);
+    }
+}
+class B : A
+{
+    public int i;
+   
+    public B()
+    {
+
+    }
+    public B(int i, int j) : base(j)
+    {
+        Console.WriteLine("inside B const");
+        this.i = i;
+    }
+    public void display()
+    {
+        Console.WriteLine("i= " + i + " j=" + j);
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        B obj = new B(10, 20);
+        A obj1 = new A(30);
+        B tmp = new B();
+        //tmp = obj1; //error bcz chlid can't store parent ref
+        tmp = obj;
+        tmp.display();
+
+
+    }
+}
+----------------------------------------------------------------------
+namespace Demo1;
+class shape
+{
+
+    protected int l, b;
+    public shape(int l, int b)
+    {
+        this.l = l;
+        this.b = b;
+    }
+
+    public virtual double area( )
+    {
+        return 0;
+    }
+    
+
+}
+class rectangle : shape
+{
+    public rectangle(int l,int b):base(l,b) 
+    {
+
+    }
+    public override double area()
+    {
+        return l*b;
+    }
+   
+}
+class triangle : shape
+{
+    public triangle(int l, int b) : base(l, b)
+    {
+
+    }
+    public override double area()
+    {
+        return (l * b)/2;
+    }
+   
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        triangle t1 = new triangle(10, 20);
+        Console.WriteLine(t1.area());
+        rectangle r1 = new rectangle(20,30);
+        Console.WriteLine(r1.area());
+
+
+    }
+}
+----------------------------------------------------------------
+namespace Demo1;
+class shape
+{
+
+    protected int l, b;
+    public shape(int l, int b)
+    {
+        this.l = l;
+        this.b = b;
+    }
+
+    public virtual double area( )
+    {
+        return 0;
+    }
+    
+
+}
+class rectangle : shape
+{
+    public rectangle(int l,int b):base(l,b) 
+    {
+
+    }
+    public override double area()
+    {
+        return l*b;
+    }
+   
+}
+class triangle : shape
+{
+    public triangle(int l, int b) : base(l, b)
+    {
+
+    }
+    public override double area()
+    {
+        return (l * b)/2;
+    }
+   
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        triangle t1 = new triangle(10, 20);
+        Console.WriteLine(t1.area());
+        rectangle r1 = new rectangle(20,30);
+        Console.WriteLine(r1.area());
+
+
+    }
+}
+-------------------------------------------------------------------------
+namespace Demo1;
+/*Create class Account having member id, name , balance.
+Id autoincrement write read only property
+Write getter setter for name and balance.
+Balance can be modified only by child class.
+This has virtual withdraw method which will 0.
+It has deposit method.
+Create two child class current and saving and override withdraw method. 
+Create reference of Account class and point to saving account
+and  current account. Using parent’s reference call withdraw method and deposit method.
+Use ToString method to display status of the object [id name balance]
+*/
+class Account
+{
+    protected int id;
+    protected string name;
+    protected double balance;
+    static int get_id;
+    public Account()
+    {
+    }
+    public Account(string name,double balance)
+    {
+        id = ++get_id;
+        this.name = name;
+        this.balance = balance;
+    }
+    public string Name{
+        get { return name; }
+        set { name = value; }
+
+    }
+    public double Balance {
+        get { return balance; } 
+        protected set { balance = value; }
+    }
+    public override string ToString()
+    {
+        return "id= "+id+" name="+name+" balanace="+balance;
+    }
+    public virtual void withdraw(double amonunt)
+    {
+
+    }
+    public void deposit(double amount)
+    {
+        balance += amount;
+    }
+}
+class Current : Account
+{
+    public Current( string name, double balance):base( name, balance)
+    {
+
+    }
+    public override void withdraw(double amonunt)
+    {
+        if (amonunt < balance)
+        {
+            balance-= amonunt;
+        }
+        else
+        {
+            Console.WriteLine("unsufficient amount");
+        }
+    }
+}
+class Saving : Account
+{
+    public Saving( string name, double balance) : base( name, balance)
+    {
+
+    }
+    public override void withdraw(double amonunt)
+    {
+        if (amonunt < balance)
+        {
+            balance -= amonunt;
+        }
+        else
+        {
+            Console.WriteLine("unsufficient amount");
+        }
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+
+        Account obj1 = new Saving("ankit yadav", 2000);
+        Console.WriteLine(obj1);
+        obj1.deposit(100);
+        Console.WriteLine(obj1);
+        obj1.withdraw(500);
+        Console.WriteLine(obj1);
+        Account obj2 = new Saving("atul yadav", 3000);
+        Console.WriteLine(obj2);
+        obj2.deposit(100);
+        Console.WriteLine(obj2);
+        obj2.withdraw(500);
+        Console.WriteLine(obj2);
+
+    }
+}
+-------------------------------------------------------------
+/*function hiding example*/
+namespace Demo1;
+class A
+{
+    public void fun()
+    {
+        Console.WriteLine("inside A fun");
+    }
+}
+class B:A
+{
+    public void fun()
+    {
+        Console.WriteLine("inside b fun");
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        A obj= new B();
+        obj.fun();
+
+        
+
+    }
+}
+----------------------------------------------------------------
+/*function overriding example*/
+namespace Demo1;
+class A
+{
+    public virtual void fun()
+    {
+        Console.WriteLine("inside A fun");
+    }
+}
+class B:A
+{
+    public override void fun()
+    {
+        Console.WriteLine("inside b fun");
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        A obj= new B();
+        obj.fun();
+
+        
+
+    }
+}
+------------------------------------------------------------
+/*static const. and const. invocation in case of inheritance*/
+namespace Demo1;
+class A
+{
+    static A()
+    {
+        Console.WriteLine("inside A static const");
+    }
+    public A() {
+        Console.WriteLine("inside A const");
+    }
+}
+class B:A
+{
+    static B()
+    {
+        Console.WriteLine("inside B static const");
+    }
+    public B()
+    {
+        Console.WriteLine("inside B const");
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        //A obj = new A();
+        /*
+         inside A static const
+         inside A const*/
+        // B obj= new B();
+        /*inside B static const
+          inside A static const
+          inside A const
+           inside B const*/
+        //A obj = new B();
+        /*
+         inside B static const
+         inside A static const
+         inside A const
+         inside B const*/
+
+
+
+
+
+    }
+}
+------------------------------------------------------------------------
+/*Example of down casting*/
+namespace Demo1;
+class A
+{
+   public void fun()
+    {
+        Console.WriteLine("inside A fun");
+    } 
+}
+class B:A
+{
+    public void fun()
+    {
+        Console.WriteLine("inside B fun");
+    }
+}
+internal class Demo
+{
+    public static void Main(String[] args)
+    {
+        A obj = new B(); 
+        obj.fun();
+        B obj2 = (B)obj;
+        obj2.fun();
+    }
+}
+-------------------------------------------------------------------
+
+ 
