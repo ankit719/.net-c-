@@ -1,0 +1,190 @@
+namespace InterfaceDemo;
+/*two interface have same function signature and deployment in same class */
+interface A
+{
+     void fun();
+}
+interface B
+{
+     void fun();
+}
+class Demo:A,B
+{
+    public void fun() {
+        Console.WriteLine("inside A fun ");
+    }
+    void B.fun() { Console.WriteLine("inside B fun");
+    }
+    public static void Main(string[] args)
+    {
+        Demo demo1=new Demo();
+        demo1.fun();
+        A demo2 = new Demo();
+        demo2.fun();
+        B demo = new Demo();
+        demo.fun();
+    }
+   
+}
+--------------------------------------------------------------
+namespace compare;
+using System.Text;
+using System.Collections;
+
+class person
+{
+    public string Name { get; set; }
+    public double salary { get; set; }
+}
+class demo : IComparer
+{
+
+    public int Compare(object obj1,object obj2)
+    {
+        person p1= obj1 as person;
+        person p2= obj2 as person;
+        if(p1 != null && p2 != null)
+        {
+            return string.Compare(p1.Name,p2.Name);
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+        
+    }
+
+   
+}
+class maindemo
+{
+    public static void Main(string[] args)
+    {
+        person[] emp = new person[5];
+        emp[0] = new person() { Name = "Ankit", salary = 1000 };
+        emp[1] = new person() { Name = "shweta", salary = 2000 };
+        emp[2] = new person() { Name = "prashant", salary = 3000 };
+        emp[3] = new person() { Name = "bhanu", salary = 4000 };
+        emp[4] = new person() { Name = "adarash", salary = 5000 };
+
+        Array.Sort(emp, new demo());
+        foreach(person e in emp)
+        {
+            Console.WriteLine("{0} {1}", e.Name, e.salary);
+        }
+
+    }
+
+}
+--------------------------------------------------------------------------
+/*delegate example*/
+
+delegate int demo(int a, int b);
+class A
+{
+    public static int add(int a,int b)
+    {
+        return a + b;
+    }
+    public static int product(int a,int b)
+    {
+        return a * b;
+    }
+    public static void Main(string[] args)
+    {
+        demo obj = add;
+        int ans = obj(10, 20);
+        Console.WriteLine("ans= "+ans);
+        obj = product;
+        ans=obj(10,20);
+        Console.WriteLine("ans= " + ans);
+    }
+    
+    
+}
+----------------------------------------------------------------------------
+
+delegate int demo(int a, int b);
+class A
+{
+    public static int add(int a,int b)
+    {
+        return a + b;
+    }
+    public static int product(int a,int b)
+    {
+        return a * b;
+    }
+    
+    
+    
+}
+class main
+{
+    public static void Main(string[] args)
+    {
+        demo obj = A.add;
+        int ans = obj(10, 20);
+        Console.WriteLine("ans= " + ans);
+        obj = A.product;
+        ans = obj(10, 20);
+        Console.WriteLine("ans= " + ans);
+    }
+}
+-------------------------------------------------------
+
+delegate int demo(int a, int b);
+class A
+{
+    public  int add(int a,int b)
+    {
+        return a + b;
+    }
+    public  int product(int a,int b)
+    {
+        return a * b;
+    }
+    
+}
+class main
+{
+    public static void Main(string[] args)
+    {
+        A ref1= new A();
+        demo obj = ref1.add;
+        int ans = obj(10, 20);
+        Console.WriteLine("ans= " + ans);
+        obj = ref1.product;
+        ans = obj(10, 20);
+        Console.WriteLine("ans= " + ans);
+    }
+}
+----------------------------------------------------------
+
+delegate void demo();
+class A
+{
+    public  void fun1()
+    {
+        Console.WriteLine("inside fun1");
+    }
+    public void fun2()
+    {
+        Console.WriteLine("inside fun2");
+    }
+
+
+}
+class main
+{
+    public static void Main(string[] args)
+    {
+        A a = new A();
+        demo obj = a.fun1;
+        obj += a.fun2;
+        obj();
+        obj -= a.fun1;
+        obj();
+    }
+}
+--------------------------------------------------------
