@@ -1,0 +1,108 @@
+ 
+/*Event example*/
+using System;
+delegate void MyDelegate();
+class EventDemo
+{
+    public event MyDelegate mydelegate;
+    public void EventHandler()
+    {
+        if(mydelegate != null)
+        {
+            mydelegate();
+        }
+    }
+}
+class Demo
+{
+    public static void Handler()
+    {
+        Console.WriteLine("event is launched");
+
+    }
+    public static void Main(string[] args)
+    {
+        EventDemo obj = new EventDemo();
+        obj.mydelegate += new MyDelegate(Handler);
+        obj.EventHandler();
+
+
+    }
+   
+}
+
+
+---------------------------------------------------------------
+ 
+using System;
+delegate void MyDelegate();
+class EventDemo
+{
+    public event MyDelegate mydelegate;
+    public void EventHandler()
+    {
+        if(mydelegate != null)
+        {
+            mydelegate();
+        }
+    }
+}
+class Demo
+{
+    public void Handler()
+    {
+        Console.WriteLine("event is launched");
+
+    }
+    public static void Main(string[] args)
+    {
+        EventDemo obj = new EventDemo();
+        Demo demo = new Demo();
+        obj.mydelegate += new MyDelegate(demo.Handler);
+        obj.EventHandler();
+
+
+    }
+   
+}
+-------------------------------------------------------------------
+ 
+using System;
+delegate void del(int x, int y);
+class task
+{
+    public void add(int x, int y)
+    {
+        Console.WriteLine(x + y);
+    }
+    public void product(int x,int y)
+    {
+        Console.WriteLine(x * y);
+    }
+}
+class tasklauncher
+{
+    public event del delobj;
+    public void launcher(int x,int y)
+    {
+        if(delobj != null)
+        {
+            delobj(x, y);
+        }
+    }
+}
+class Demo
+{
+    public static void Main(string[] args)
+    {
+        task obj1= new task();
+        tasklauncher obj2= new tasklauncher();
+        obj2.delobj += obj1.add;
+        obj2.delobj += obj1.product;
+        obj2.launcher(10,20);
+
+    }
+}
+
+-------------------------------------------------------------
+
