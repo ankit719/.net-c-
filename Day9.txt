@@ -1,0 +1,299 @@
+
+using System;
+
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] arr = new int[] {1,2,3,4,5,6,7,8,9};
+        for(int i = 0; i < arr.Length; i++)
+        {
+            try
+            {
+                if (arr[i]%2==0)
+                    Console.WriteLine(arr[i]/0);
+                Console.WriteLine(arr[i]/1);
+            }
+            catch // (DivideByZeroException)
+            {
+                Console.WriteLine("divide by valied number");
+            }
+            finally
+            {
+                Console.WriteLine("inside finally");
+            }
+        }
+    }
+}
+
+------------------------------------------------------------
+
+using System;
+
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] arr = new int[] {1,2,3,4,5,6,7,8,9};
+        for(int i = 0; i < arr.Length; i++)
+        {
+            try
+            {
+                if (arr[i]%2==0)
+                    Console.WriteLine(arr[i]/0);
+                Console.WriteLine(arr[i]/1);
+            }
+            catch //(DivideByZeroException)
+            {
+                Console.WriteLine("divide by valied number");
+                try
+                {
+                    throw new Exception("throw divide by valid number");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+
+            }
+            finally
+            {
+                Console.WriteLine("inside finally");
+            }
+        }
+    }
+}
+--------------------------------------------------------------------
+
+using System;
+
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] arr = new int[] {1,2,3,4,5,6,7,8,9};
+        for(int i = 0; i < arr.Length; i++)
+        {
+            try
+            {
+                if (arr[i]%2==0)
+                    Console.WriteLine(arr[i]/0);
+                Console.WriteLine(arr[i]/1);
+            }
+            finally
+            {
+                Console.WriteLine("inside finally");
+            }
+        }
+    }
+}
+-------------------------------------------------------------
+
+using System;
+
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] arr = new int[] {1,2,3,4,5,6,7,8,9};
+        for(int i = 0; i < arr.Length; i++)
+        {
+            try
+            {
+                if (arr[i]%2==0)
+                    Console.WriteLine(arr[i]/0);
+                Console.WriteLine(arr[i]/1);
+            }
+            catch
+            {
+                Console.WriteLine("exception handled");
+            }
+
+            finally
+            {
+                Console.WriteLine("inside finally");
+            }
+            Console.WriteLine("after handling exception inside for");
+        }
+        Console.WriteLine("after handling exception outside for");
+    }
+}
+---------------------------------------------------------------------
+
+using System;
+
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] arr = new int[] {1,2,3,4,5,6,7,8,9};
+        for(int i = 0; i < arr.Length; i++)
+        {
+            try
+            {
+                if (arr[i]%2==0)
+                    Console.WriteLine(arr[i]/0);
+                Console.WriteLine(arr[i]/1);
+            }
+
+            finally
+            {
+                Console.WriteLine("inside finally");
+            }
+            Console.WriteLine("after handling exception inside for");
+        }
+        Console.WriteLine("after handling exception outside for");
+    }
+}
+-----------------------------------------------------------------------
+
+using System;
+
+class Demo
+{
+    static int j;
+    public void fun(int x)
+    {
+        //static int j;
+        if(x<0)
+        {
+            throw new Exception("enter positive number");
+        }
+        int ans = x / 0;
+        Console.WriteLine(ans);
+    }
+}
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        Demo demo = new Demo();
+        try
+        {
+            demo.fun(-10);
+            Console.WriteLine("inside try block");
+        }catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        Console.WriteLine("after try catch");
+    }
+}
+----------------------------------------------------------------
+
+using System;
+
+class OverloadConsDemo
+{
+    public static void Main()
+    {
+        int[] num = {1,5,8,9,4,33,22,456,65,33,22,11};
+        int[] div = { 1, 0, 2, 0, 3, 0, 4 };
+        for(int i=0;i<num.Length; i++)
+        {
+            try
+            {
+                System.Console.WriteLine(num[i] + "/" + div[i] + "=" + num[i] / div[i]);
+            }
+            catch
+            {
+                Console.WriteLine("some exception is occurs");
+            }
+        }
+    }
+}
+-----------------------------------------------------------------
+// Use finally. 
+using System;
+class UseFinally
+{
+    public static int genException(int a,int b)
+    {
+        try
+        {
+            // Attempting division
+            return a / b;
+        }
+        catch (ArithmeticException e)
+        {
+            Console.WriteLine("Division by zero error: " );
+            return -1; // Return a specific value to indicate an error condition
+        }
+        finally
+        {
+            Console.WriteLine("Finally block executed");
+            //return -2; // error in c# but work in java
+        }
+    }
+}
+
+class FinallyDemo
+{
+    public static void Main()
+    {
+        int ans = UseFinally.genException(10,20);
+        Console.WriteLine("ams= " + ans);
+    }
+}
+
+----------------------------------------------------------------
+// Use finally. 
+using System;
+using System.ComponentModel.DataAnnotations;
+
+class Demo
+{
+    int a = new int();
+    int b;
+    string s = new string("ankit");
+    public Demo()
+    {
+       
+    }
+    public Demo(int a,int b)
+    {
+        this.a = a;
+        this.b = b;
+    }
+    public void Display()
+    {
+        Console.WriteLine("a= " + a + " b=" + b+" s="+s);
+    }
+    
+}
+
+class FinallyDemo
+{
+    public static void Main()
+    {
+        Demo obj = new Demo();
+        obj.Display();
+    }
+}
+
+--------------------------------------------------------------
+class FinallyDemo
+{
+    public static void Main()
+    {
+        //it throw exception when cross limit
+        int a = int.MaxValue;
+        int b =checked( a + 1);
+        Console.WriteLine("b= " + b);
+        
+        /*------------------------------------*/
+        //it when cross the limit go in reverse direction
+        int c = int.MaxValue;
+        int d = a + 1;
+        Console.WriteLine("d= " + d);
+    }
+}
+---------------------------------------------------------------
+
+
+
