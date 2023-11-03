@@ -1,0 +1,100 @@
+Data Source=(localdb)\ProjectModels;Initial Catalog=Demo_product;Integrated Security=True;
+------------------------------------------------------------------------------------------
+Data Source=(localdb)\ProjectModels;Initial Catalog=Demo_Emp;Integrated Security=True;
+-----------------------------------------------------------------------------------------
+Package Required
+-----------------
+Install-package Microsoft.Extensions.Configuration;
+Install-package Microsoft.Extensions.Configuration.FileExtensions;
+Install-package Microsoft.Extensions.Configuration.Json;
+Install-package System.Data.SqlClient;
+
+-------------------------------------------------------------------
+server name:Source=(localdb)\ProjectModels
+data base name:Initial Catalog=Demo_product
+window authentication:Security=True
+--------------------------------------------------------------------
+Appsetting.json
+--------------
+{
+  "ConnectionStrings": {
+    "Default": "Data Source=(localdb)\\ProjectModels;Initial Catalog=Demo_product;Integrated Security=True;"
+  }
+}
+--------------------------------------------------------------------
+program.cs-->containing Main
+--------------
+using Microsoft.Extensions.Configuration;
+
+namespace CANSOLE_ADOnet
+{
+    internal class Program
+    {
+        private static IConfiguration _iconfiguration;
+        static void Main(string[] args)
+        {
+            GetAppSettingsFile();
+            //Console.WriteLine(Directory.GetCurrentDirectory());
+            PrintProduct();
+            
+        }
+        static void GetAppSettingsFile()
+         {
+             var builder = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetCurrentDirectory())
+             .AddJsonFile("Appsettings.json", optional: false, reloadOnChange: true);
+             _iconfiguration = builder.Build();
+         }
+        static void PrintProduct()
+        {
+            Productlayer obj = new Productlayer(_iconfiguration);
+            obj.Products();
+        }
+    }
+}
+-------------------------------------------------------------------------
+productlayer.cs-->used to fetch data from server and data base and show on console
+---------------------
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CANSOLE_ADOnet
+{
+   
+    internal class Productlayer
+    {
+        private string _connectionString;
+        public Productlayer(IConfiguration iconfiguration)
+        {
+            _connectionString = iconfiguration.GetConnectionString("Default");
+            //with the help of this line program know the data base and server name bcz it store on handle Default variable in json file
+        }
+        public void Products()
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                // Pass the connection to the command object, so the command object knows on which
+                // connection to execute the command
+                SqlCommand cmd = new SqlCommand("Select * from Product", con);
+                // Open the connection. Otherwise you get a runtime error. An open connection is
+                // required to execute the command            
+                con.Open();
+                Console.WriteLine("connected");
+                SqlDataReader rdr = cmd.ExecuteReader(); //returns object of sqldatareder
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        Console.WriteLine("{0} {1} {2} {3}", rdr["Id"], rdr["Name"], rdr["Price"], rdr["Qty"]);
+                    }
+                }
+            }
+
+        }
+    }
+}
