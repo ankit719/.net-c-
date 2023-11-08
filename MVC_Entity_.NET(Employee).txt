@@ -1,0 +1,207 @@
+
+Models-->Employee.cs
+-------------------------------
+using System.ComponentModel.DataAnnotations;
+
+namespace WP01.Models
+{
+    public class Employee
+    {
+      
+        public int Id { get; set; }
+
+        [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
+        public string Name { get; set; }
+        [Display(Name = "Office Email")]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+        ErrorMessage = "Invalid email format")]
+
+        public string Email { get; set; }
+        public Dept? Department { get; set; }
+
+    
+          public enum Dept
+         {
+               HR,
+               Payroll,
+               IT
+          }
+
+     }
+}
+
+
+-----------------------------------------------------------------------
+Models-->IEmployeeRepository.cs
+--------------------------------
+namespace WP01.Models
+{
+    public interface IEmployeeRepository
+    {
+        public IEnumerable<Employee> GetAllEmployee();
+
+    }
+}
+------------------------------------------------------------------------
+Models-->MockEmployeeRepository.cs
+----------------------------------
+using static WP01.Models.Employee;
+
+namespace WP01.Models
+{
+    public class MockEmployeeRepository: IEmployeeRepository
+    {
+        private static List<Employee> _employeeList;
+
+        public MockEmployeeRepository()
+        {
+            _employeeList = new List<Employee>(){
+            new Employee() { Id = 1, Name = "Mary", Department = Dept.HR, Email = "mary@CDACtech.com" },
+            new Employee() { Id = 2, Name = "John", Department = Dept.IT, Email = "john@CDACtech.com" },
+            new Employee() { Id = 3, Name = "Sam", Department = Dept.IT, Email = "sam@CDACtech.com" },
+            };
+        }
+
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return _employeeList;
+        }
+    }
+}
+------------------------------------------------------------------------
+Controllers-->EmployeeController.cs
+------------------------------------
+  using Microsoft.AspNetCore.Mvc;
+using WP01.Models;
+
+namespace WP01.Controllers
+{
+    public class EmployeeController : Controller
+    {
+        IEmployeeRepository _emprp;
+        public EmployeeController(IEmployeeRepository emprp)
+        {
+            _emprp = emprp;
+        }
+        public ActionResult Index()
+        {
+            var emprp = _emprp.GetAllEmployee();
+            return View(emprp);
+        }
+        public ActionResult Display()
+        {
+            return View();
+        }
+    }
+}
+----------------------------------------------------------------------
+Views-->Employee-->Index.cshtml
+-------------------------------
+@model IEnumerable<WP01.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index--------";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+-----------------------------------------------------------------------
+Program.cs
+-----------------
+using WP01.Models;
+
+namespace WP01
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
+
+            var app = builder.Build();//web application made in this line...firstly its console application
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Department}/{action=Index}/{id?}");
+
+            app.Run();
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------
+Example:
+-------------
+create a mvc application 
+1-create poco class customer id ,name,mobile,billamount
+2-craete a interface icustomer with method Imeruable<customer> getallcustomer
+3-create class servicecustomer/implement icustomer
+4-create a controller customer
+5-create constructor and inject interface reference 
+6-write action method index which will return list of customer
+7-generate view
+8-in program.cs file call(AddTransient)method
+9-when you run the program it should display list of customer
